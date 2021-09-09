@@ -1,24 +1,17 @@
-# app
+# POLKADOT-explorer-web-app
 
-## Project setup
-```
-npm install
-```
+## Project requirements
+- Docker
+- node js
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
+### Run project
 ```
-npm run build
+docker build -t explorer .
+docker run -dp 4000:4000 explorer
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+### Configuration
+To change the api server go to /src/main.js and edit API_URL.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
