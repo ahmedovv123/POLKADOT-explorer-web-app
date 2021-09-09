@@ -21,8 +21,8 @@
         <div class="nav-item dropdown" style="white-space: nowrap;">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Transactions</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><router-link to="/blocks/number">Get X Unconfirmed transactions</router-link></li>
-            <li><router-link to="/blocks/number/x">Get Transaction by Hash</router-link></li>
+            <li><router-link to="/">Get X Unconfirmed transactions</router-link></li>
+            <li><router-link to="/transactions/hash">Get Transaction by Hash</router-link></li>
           </ul>
         </div>
               |
@@ -31,7 +31,7 @@
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Accounts</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><router-link to="/address">Get data for address</router-link></li>
-            <li><router-link to="/blocks/number/x">Search Transactions of Address</router-link></li>
+            <li><router-link to="/">Search Transactions of Address</router-link></li>
           </ul>
         </div>
 

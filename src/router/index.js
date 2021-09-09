@@ -51,6 +51,12 @@ const routes = [
     name: 'AddressInfo',
     
     component: () => import('../components/GetAddressInfo.vue')
+  },
+  {
+    path: '/transactions/hash',
+    name: 'TransactionByHash',
+    
+    component: () => import('../components/GetTransactionByHash.vue')
   }
 ]
 
