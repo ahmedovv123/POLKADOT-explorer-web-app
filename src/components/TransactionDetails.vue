@@ -1,20 +1,9 @@
 <template>
-  
-  <div >
-
-      <form v-on:submit.prevent="onSubmit">
-          <div class="mb-3">
-          <input v-model="htransaction"> |
-          <input type="submit" class="btn btn-primary" >
-          </div>
-      </form>
-   
-      
-      
-  </div>
+ 
 
   <div v-if="seen" class="container">
-     <table class="table" v-for="transaction in transactions" v-bind:key="transaction">
+      
+      <table class="table" v-for="transaction in transactions" v-bind:key="transaction">
           <tbody>
           
             <tr>
@@ -49,14 +38,13 @@
             </tr>
           </tbody>
           </table>
-      
   </div>
   
 </template>
 <script>
 import axios from 'axios';
   export default {
-    name: 'TransactionByHash',
+    name: 'TransactionDetails',
     data() {
     
       return {
@@ -66,11 +54,10 @@ import axios from 'axios';
       }
     },
     
-    methods: {
-        onSubmit () {
+   mounted  () {
   
       axios
-        .post(this.api+'/transactions/hash/',{transactionHash:this.htransaction})
+        .post(this.api+'/transactions/hash/',{transactionHash: this.$route.params.hash})
         .then(res => {
           this.transactions = res.data;      
         this.seen=true;
@@ -82,7 +69,7 @@ import axios from 'axios';
         
         }
     }
-  }
+  
   
   
 </script>
