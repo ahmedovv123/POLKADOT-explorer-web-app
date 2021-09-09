@@ -57,7 +57,7 @@ import axios from 'axios';
         onSubmit () {
   
       axios
-        .get(this.api+'/address/'+ this.adr)
+        .get(this.api+'/address/balance/'+ this.adr)
         .then(res => {
           this.data = res.data;    this.seen=true;  
         
