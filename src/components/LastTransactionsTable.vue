@@ -70,6 +70,7 @@
                 return extrinsic.method.args[1]
             },
             goToAccount(accountId){
+                this.$store.dispatch('toggleOnLoading')
                 this.$router.push({path: `/accounts/${accountId}`})
             }
         },

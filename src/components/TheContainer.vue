@@ -21,6 +21,7 @@ import TheSpinner from './TheSpinner.vue'
         margin-left: auto;
         margin-right: auto;
         width: 70%; 
+        height: 1000px
         
     }
 </style>

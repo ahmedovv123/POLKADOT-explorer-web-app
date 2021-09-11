@@ -8,8 +8,11 @@ export default createStore({
         isLoading: false
     },
     mutations: {
-        toggleLoading(state) {
-            state.isLoading = !state.isLoading
+        toggleOffLoading(state) {
+            state.isLoading = false
+        },
+        toggleOnLoading(state) {
+            state.isLoading = true
         },
         fetchBlock(state, block){
             state.blocks.unshift(block)
@@ -27,8 +30,11 @@ export default createStore({
         },
     },
     actions: {
-        toggleLoading({commit}){
-            commit('toggleLoading')
+        toggleOffLoading({commit}){
+            commit('toggleOffLoading')
+        },
+        toggleOnLoading({commit}){
+            commit('toggleOnLoading')
         },
         fetchBlock({ commit }){
             
@@ -64,6 +70,9 @@ export default createStore({
         },
         getTransactions(state) {
             return state.transactions
+        },
+        getLoading(state){
+            return state.isLoading
         }
 
     },

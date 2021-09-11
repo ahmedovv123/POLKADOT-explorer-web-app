@@ -1,6 +1,10 @@
 <template>
 
   <TheNavBar v-once />
+  <div v-show='isLoading' >
+     <TheSpinner />
+  </div>
+ 
   <TheContainer>
     
     <router-view/>
@@ -14,8 +18,8 @@
 import TheNavBar from './components/TheNavBar.vue'
 import TheContainer from './components/TheContainer.vue'
 import TheFooter from './components/TheFooter.vue'
-
-
+import TheSpinner from './components/TheSpinner.vue'
+import {mapState} from 'vuex'
 
 export default {
   name:'App',
@@ -23,8 +27,21 @@ export default {
     TheNavBar,
     TheContainer, 
     TheFooter,
+    TheSpinner
     
+  },
+  computed: {
+    //isLoading: this.$store.getters.getLoading
+    ...mapState({
+      isLoading: state=> state.isLoading
+    })
+  },
+  watch: {
+    isLoading(){
+      console.log('toggle')
+    }
   }
+
 }
 </script>
 

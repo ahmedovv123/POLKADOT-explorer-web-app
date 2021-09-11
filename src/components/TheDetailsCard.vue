@@ -1,5 +1,5 @@
 <template>
-<h2 style="color: red" v-if="errorMsg" >Cant get blocks :(</h2>
+
     <div class="cards">
         
         <router-link to="/blocks">

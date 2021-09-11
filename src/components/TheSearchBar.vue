@@ -17,16 +17,22 @@
                 if(this.input.charAt(0) == '1'){
                     if(this.input.length > 10 ) {
                         console.log('its a account')
+                        this.$store.dispatch('toggleOnLoading')
+                        
                         this.$router.push({path:`/accounts/${this.input}`})
+                        
                     }else {
+                        this.$store.dispatch('toggleOnLoading')
                         this.$router.push({path:`/blocks/${this.input}`})
                         console.log('its a block number')
                     } 
                 }else if (this.input.length < 10) {
+                    this.$store.dispatch('toggleOnLoading')
                     this.$router.push({path:`/blocks/${this.input}`})
                     console.log('its a block number')
                 } 
                 else if(this.input.substring(0,2) == '0x'){
+                    this.$store.dispatch('toggleOnLoading')
                     this.$router.push({path:`/transactions/${this.input}`})
                     console.log('its a tx hash')
                 } 

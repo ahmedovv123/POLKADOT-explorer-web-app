@@ -66,10 +66,11 @@
                 return blockDate
             },
             getTransactionsLength(extrinsics){
-                return extrinsics.filter(ex => ex.method.method == 'transfer').length
+                return extrinsics.filter(ex => ex.method.method == 'transfer' || ex.method.method == 'transfer_keep_alive' ).length
             },
             goToBlock(blockNumber){
                 let block = parseFloat(blockNumber.replace(/,/g,''))
+                this.$store.dispatch('toggleOnLoading')
                 this.$router.push({path: `/blocks/${block}`})
             }
         },
