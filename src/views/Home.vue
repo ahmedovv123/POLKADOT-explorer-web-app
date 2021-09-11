@@ -1,18 +1,58 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <TheSearchBar v-once/>
+    <TheDetailsCard />
+    <div class="blocks-tx" >
+      <div class="blocks" >
+        <LastBlocksTable />
+      </div>
+      <div class="txs">
+        <LastTransactionsTable />
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
+import TheSearchBar from '../components/TheSearchBar.vue'
+import TheDetailsCard from '../components/TheDetailsCard.vue'
+import LastBlocksTable from '../components/LastBlocksTable.vue'
+import LastTransactionsTable from '../components/LastTransactionsTable.vue'
+
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    TheSearchBar,
+    TheDetailsCard,
+    LastTransactionsTable,
+    LastBlocksTable
   }
 }
 </script>
+
+<style scoped>
+.blocks-tx {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 500px;
+  margin-bottom: 100px;
+  
+  
+}
+
+.blocks, .txs {
+  width: 47%;
+  height: 100%;
+  border: 2px solid grey;
+  border-radius: 10px;
+  overflow:hidden;
+  
+  
+}
+
+
+</style>
