@@ -1,6 +1,6 @@
 <template>
    <div class="table">
-        <router-link to="/transactions"> <h2>Last Transactions</h2> </router-link>
+        <router-link to="/transactions">  <h2>  Last Transactions <i class="fas fa-file-signature"></i></h2> </router-link>
         <table>
              <colgroup>
         <col width="33%" />
@@ -74,7 +74,7 @@
                 this.$router.push({path: `/accounts/${accountId}`})
             }
         },
-        beforeDestroy(){
+        beforeUnmount(){
             this.cancelAutoUpdate();
         },
         

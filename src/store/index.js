@@ -5,7 +5,8 @@ export default createStore({
     state: {
         blocks: [],
         transactions: [],
-        isLoading: false
+        isLoading: false,
+        
     },
     mutations: {
         toggleOffLoading(state) {
@@ -15,7 +16,11 @@ export default createStore({
             state.isLoading = true
         },
         fetchBlock(state, block){
-            state.blocks.unshift(block)
+            if(!state.blocks.some(e => e.header.number === block.header.number)){
+                
+                state.blocks.unshift(block)
+            }
+            
             
         },
         clearBlocks(state){
@@ -36,11 +41,14 @@ export default createStore({
         toggleOnLoading({commit}){
             commit('toggleOnLoading')
         },
-        fetchBlock({ commit }){
+        fetchBlock({ commit, state }){
             
             blockApi.get()
             .then(response => {
                 commit('fetchBlock',response.data.block)
+                
+                if(state.blocks.length > 13) 
+                commit('clearBlocks')
             })
         },
         clearBlocks({commit}){
@@ -52,8 +60,12 @@ export default createStore({
             .then(response => {
                 
                 response.data.block.extrinsics.map(ex => {
-                    if(ex.method.method == 'transfer')
-                    commit('fetchTransaction',ex)
+                    
+                    if(ex.method.method == 'transfer'){
+                        
+                        commit('fetchTransaction',ex)
+                    }
+                   
                 })
                 
 

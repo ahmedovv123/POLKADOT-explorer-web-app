@@ -16,7 +16,7 @@
             </div>
             <div class="right">
                 <h3>{{blockDate(block.extrinsics[0].method.args[0])}}</h3>
-                <h3>Hash</h3>
+                <h3>{{blockHash}}</h3>
                 <h3>{{block.header.parentHash}}</h3>
                 <h3>{{block.header.stateRoot}}</h3>
                 <h3>{{block.header.extrinsicsRoot}}</h3>
@@ -46,6 +46,7 @@ import blocksApi from '../gateways/blockApis/blocksApi'
         data (){
            return {
                blockNumber: this.$route.params.num,
+               blockHash: '',
                block: {}
            } 
         },beforeCreate(){
@@ -56,6 +57,7 @@ import blocksApi from '../gateways/blockApis/blocksApi'
 
             blocksApi.get(`/num/${this.blockNumber}`)
             .then(response => {
+                this.blockHash = response.data
                blocksApi.post('/hash', {'hash':response.data})
                .then(response => {
                    this.block = response.data.block

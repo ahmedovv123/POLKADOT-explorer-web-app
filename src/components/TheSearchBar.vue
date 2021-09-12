@@ -1,6 +1,9 @@
 <template>
     <div class='inputs'>
-        <input @keydown.enter='sendData' placeholder=" Search by block / transaction / account" type="text" v-model="input">
+        <div style="color:red" v-show="errorMsg" ><h3> {{errorMsg}} </h3></div>
+        
+        <input @keydown.enter='sendData' placeholder="Search by block / transaction / account" type="text" v-model="input">
+        
     </div>
 </template>
 
@@ -9,7 +12,8 @@
         name: 'TheSearchBar',
         data(){
             return {
-                input: ''
+                input: '',
+                errorMsg:''
             }
         },
         methods: {
@@ -35,7 +39,10 @@
                     this.$store.dispatch('toggleOnLoading')
                     this.$router.push({path:`/transactions/${this.input}`})
                     console.log('its a tx hash')
-                } 
+                }else{
+                    console.log('invalid')
+                    this.errorMsg = 'Invalid input !'
+                }
             }
         }
     }
@@ -44,12 +51,14 @@
 
 <style scoped>
 .inputs{
-    display: flex;
+    display: block;
     justify-content: center;
     margin-bottom: 50px;
 }
+
+
 input{
-    margin-left: 20px;
+   
     border-radius: 10px;
     width: 100%;
     height: 50px;

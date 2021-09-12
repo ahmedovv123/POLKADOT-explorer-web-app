@@ -2,13 +2,13 @@
     <div id="nav">
       
     
-    <router-link to="/">Polkadot Explorer</router-link> 
+    <router-link to="/"> <i class="fas fa-globe"></i> Polkadot Explorer</router-link> 
       
     <div class="nav-links" >
    
-    <router-link class='nav-link' to="/blocks">Blocks</router-link> 
-    <router-link class='nav-link' to="/accounts">Accounts</router-link> 
-    <router-link class='nav-link' to="/transactions">Transactions</router-link>
+    <router-link class='nav-link' to="/blocks">  <i class="fas fa-cube"></i> Blocks</router-link> 
+    <router-link class='nav-link' to="/accounts">  <i class="far fa-user"></i>  Accounts</router-link> 
+    <router-link class='nav-link' to="/transactions"> <i class="fas fa-file-signature"></i> Transactions</router-link>
     </div>
 
   </div>

@@ -50,8 +50,15 @@ export default {
   border: 2px solid grey;
   border-radius: 10px;
   overflow:hidden;
-  
-  
+  transition: all 0.3s ease-in-out;
+}
+
+.blocks:hover {
+  border: 2px solid blue;
+}
+
+.txs:hover{
+  border: 2px solid blue;
 }
 
 

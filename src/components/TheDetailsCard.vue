@@ -5,8 +5,8 @@
         <router-link to="/blocks">
         <div class="card">
             
-            <div class="card-header">Finalized Blocks</div>
-            <div class="card-body">  {{finalizedBlocks}} </div>
+            <div class="card-header">Finalized Blocks </div>
+            <div class="card-body">  {{finalizedBlocks}}  </div>
             
         </div>
         </router-link> 
@@ -47,6 +47,10 @@ import txApi from '../gateways/transactionApis/transactionsApi'
                 errorMsg: ''
             }
         },
+
+        beforeCreate(){
+            this.$store.dispatch('toggleOnLoading')
+        },
         created(){
             this.fetchBlocksNumber()
             this.blockTimer = setInterval(this.fetchBlocksNumber,2000)
@@ -55,9 +59,14 @@ import txApi from '../gateways/transactionApis/transactionsApi'
             this.accountTimer = setInterval(this.fetchAccountsNumber,10000)
 
             this.fetchTxNumber()
-            this.txTimer = setInterval(this.fetchTxNumber, 5000)
+            this.txTimer = setInterval(this.fetchTxNumber, 5000) 
+
+            
         },
+       
+        
         methods: {
+            
            fetchBlocksNumber() {
             blocksApi.get()
             .then(response => this.finalizedBlocks = response.data.block.header.number)
@@ -65,13 +74,22 @@ import txApi from '../gateways/transactionApis/transactionsApi'
            },
            fetchAccountsNumber(){
              accountsApi.get('/count')
-             .then(response => this.accounts = response.data[0].count)
+             .then(response => {
+                 this.accounts = response.data[0].count
+                 this.$store.dispatch('toggleOffLoading')
+             })
+             
              .catch(error => this.errorMsg = error)
            },
            fetchTxNumber(){
               txApi.get('/count')
-             .then(response => this.txs = response.data[0].count)
+             .then(response => {
+                this.txs = response.data[0].count
+                
+                
+             })
              .catch(error => this.errorMsg = error)
+             
            },
            cancelAutoUpdate() {
                clearInterval(this.blockTimer)
@@ -79,9 +97,10 @@ import txApi from '../gateways/transactionApis/transactionsApi'
                clearInterval(this.txTimer)
            }
         },
-        beforeDestroy(){
+        beforeUnmount(){
             this.cancelAutoUpdate();
-        }
+        },
+       
     }
 </script>
 

@@ -7,7 +7,7 @@
  
   <TheContainer>
     
-    <router-view/>
+    <router-view :key="$route.fullPath"/>
    
   </TheContainer>
   <TheFooter v-once/>

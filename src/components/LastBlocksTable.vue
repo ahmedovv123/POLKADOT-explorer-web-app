@@ -1,6 +1,6 @@
  <template>
     <div class="table">
-        <router-link to="/blocks"> <h2>Last Blocks</h2> </router-link>
+        <router-link to="/blocks"> <h2>Last Blocks  <i class="fas fa-cube"></i> </h2> </router-link>
         <table>
             
             <tr class="header">
@@ -34,7 +34,7 @@
         computed: {
             blocks: {
                 get() {
-                    return this.$store.state.blocks
+                    return this.$store.getters.getBlock
                 },
                 set(){
                     
@@ -50,13 +50,11 @@
         methods: {
             fetchLastBlock() {
                 this.$store.dispatch('fetchBlock')
-               
-                if(this.blocks.length > 13) 
-                this.$store.dispatch('clearBlocks')
-                
+                 
             },
             cancelAutoUpdate(){
                 clearInterval(this.timer)
+               
             },
             blockDate(timestamp){
                 let seconds = parseFloat(timestamp.replace(/,/g,''))
@@ -74,7 +72,7 @@
                 this.$router.push({path: `/blocks/${block}`})
             }
         },
-        beforeDestroy(){
+        beforeUnmount(){
             this.cancelAutoUpdate();
         },
         

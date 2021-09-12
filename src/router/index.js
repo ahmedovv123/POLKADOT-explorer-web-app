@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 
+
 const routes = [
   {
     path: '/',
@@ -10,7 +11,8 @@ const routes = [
   {
     path: '/blocks',
     name: 'Blocks',
-    props: true,
+    
+    props: route => ({page: route.query.page}),
     component: () => import(/* webpackChunkName: "about" */ '../views/Blocks.vue')
   },
   {
