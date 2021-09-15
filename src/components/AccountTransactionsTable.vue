@@ -34,7 +34,7 @@
             <td> {{parseInt(tx.amount) / 10000000000 }} DOT</td>
             
             <div class="btn" >
-                <BaseButton @click='goToTx(block.header.number)' >Details</BaseButton>
+                <BaseButton @click='goToTx(tx.hash)' >Details</BaseButton>
             </div>
             
             </tr>
@@ -76,6 +76,12 @@ import addressesApi from '../gateways/accountApis/addressesApi'
                 this.$router.push({name:'Account', query:{ txPage: previousPage } } )
                  
             },
+            goToTx(hash){
+                
+                this.$store.dispatch('toggleOnLoading'),
+                    this.$router.push({path:`/transactions/${hash}`})
+                 
+            }
         },
         data(){
             return {

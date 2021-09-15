@@ -52,7 +52,7 @@ import BaseButton from '../components/BaseButton.vue'
             return {
                 blocks: [],
                 blockHashes: [],
-                blocksPerPage: 24,
+                blocksPerPage: 19,
                 currentPage: this.page
                
             }

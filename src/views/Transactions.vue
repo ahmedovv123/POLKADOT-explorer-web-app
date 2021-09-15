@@ -60,7 +60,7 @@ import BaseButton from '../components/BaseButton.vue'
             return {
                 currentPage: this.txPage,
                 txs: [],
-                txPerPage: 25
+                txPerPage: 24
             }
         },
         components: {
