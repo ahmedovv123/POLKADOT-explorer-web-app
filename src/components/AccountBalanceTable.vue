@@ -3,7 +3,7 @@
         <div class="account-card">
             <div class="header">
               <i class="far fa-user"></i> 
-              <h2>{{this.$route.params.id}}</h2>
+              <h2 >{{accountId}}</h2>
             </div>
             <div class="balance">
                 <div class="left">
@@ -12,8 +12,8 @@
                     <h3>Misc frozen:  </h3>
                     <h3>Reserved: </h3>
                 </div>
-                <div class="right">
-                    <h3>{{accountBalance.data.feeFrozen}}  </h3>
+                <div  v-if='accountBalance' class="right">
+                    <h3 >{{accountBalance.data.feeFrozen}}  </h3>
                     <h3>{{accountBalance.data.free}} </h3>
                     <h3>{{accountBalance.data.miscFrozen}}  </h3>
                     <h3>{{accountBalance.data.reserved}} </h3>
@@ -28,6 +28,7 @@
 <script>
     export default {
         name: 'AccountBalanceTable',
+       
         props: {
             accountBalance: Object,
             accountId: String

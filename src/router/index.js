@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 
 
+
 const routes = [
   {
     path: '/',
@@ -13,33 +14,36 @@ const routes = [
     name: 'Blocks',
     
     props: route => ({page: route.query.page}),
-    component: () => import(/* webpackChunkName: "about" */ '../views/Blocks.vue')
+    component: () => import('../views/Blocks.vue')
   },
   {
     path: '/blocks/:num',
     name: 'Block',
     props: true,
-    component: () => import(/* webpackChunkName: "about" */ '../views/Block.vue')
+    component: () => import( '../views/Block.vue')
   },
   {
     path: '/accounts',
     name: 'Accounts',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Accounts.vue')
+    props: route => ({page: route.query.page}),
+    component: () => import( '../views/Accounts.vue')
   },
   {
     path: '/accounts/:id',
     name: 'Account',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Account.vue')
+    props: route => ({txPage: route.query.txPage}),
+    component: () => import( '../views/Account.vue')
   },
   {
     path: '/transactions',
     name: 'Transactions',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Transactions.vue')
+    props: route => ({txPage: route.query.txPage}),
+    component: () => import( '../views/Transactions.vue')
   },
   {
     path: '/transactions/:txhash',
     name: 'Transaction',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Transaction.vue')
+    component: () => import('../views/Transaction.vue')
   }
 
 ]

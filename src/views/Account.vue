@@ -1,7 +1,8 @@
 <template>
     <div>
        <AccountBalanceTable :accountId='accountId' :accountBalance='accountBalance' />
-       <AccountTransactionsTable :accountTxs='accountTxs' />
+       <AccountTransactionsTable :txPage='txPage' :accountId='accountId' :accountTxs='accountTxs' />
+       
         
     </div>
 </template>
@@ -17,6 +18,9 @@ import AccountTransactionsTable from '../components/AccountTransactionsTable.vue
             AccountBalanceTable,
             AccountTransactionsTable
         },
+        props: {
+            txPage: String
+        },
         data(){
             return {
                 accountId: '',
@@ -30,17 +34,17 @@ import AccountTransactionsTable from '../components/AccountTransactionsTable.vue
         },
         created(){
 
-            this.accountId= this.$route.params.id,
+            this.accountId= this.$route.params.id
             
             addressesApi.get(`/balance/${this.accountId}`)
             .then(response => {
                 this.accountBalance = response.data
-                console.log(response)
+               
 
                 addressesApi.get(`/transactions/${this.accountId}`)
                 .then(response => {
                     this.accountTxs = response.data
-                    console.log(response)
+                    
                     this.$store.dispatch('toggleOffLoading')
                 })
                 .catch(err => console.log(err))

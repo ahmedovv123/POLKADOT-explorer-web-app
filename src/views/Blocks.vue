@@ -5,10 +5,10 @@
             <h2> <i class="fas fa-cube"> </i> Blocks</h2>
             </div>
             <table>
-            
+
             <tr class="header">
                 <th>Number </th>
-                <th> Date  </th>
+                <th>Date  </th>
                 <th>Block hash </th>
                 <th>Signed Extrinsics </th>
                 <th>Details</th>
@@ -26,12 +26,9 @@
             </div>
             
             </tr>
-            
-            
+                   
         </table>
        
-        
-        
         </div>
          <div class="pagination">
             <div v-show="currentPage > 1"  @click='goPreviousPage' class="previous"> <i class="fas fa-arrow-circle-left"></i> </div>

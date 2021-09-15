@@ -64,7 +64,7 @@
                 return blockDate
             },
             getTransactionsLength(extrinsics){
-                return extrinsics.filter(ex => ex.method.method == 'transfer' || ex.method.method == 'transfer_keep_alive' ).length
+                return extrinsics.filter(ex => ex.method.method == 'transfer' || ex.method.method == 'transferKeepAlive' ).length
             },
             goToBlock(blockNumber){
                 let block = parseFloat(blockNumber.replace(/,/g,''))

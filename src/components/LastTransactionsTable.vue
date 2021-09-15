@@ -61,10 +61,11 @@
                 clearInterval(this.timer)
             },
             getTxSender(extrinsic){
-                return  extrinsic.signer
+                
+                return  extrinsic.signer.Id
             },
             getTxRecipient(extrinsic){
-                return extrinsic.method.args[0]
+                return extrinsic.method.args[0].Id
             },
             getTxAmount(extrinsic){
                 return extrinsic.method.args[1]

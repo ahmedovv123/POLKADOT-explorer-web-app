@@ -1,27 +1,12 @@
 <template>
 
     <div class="cards">
+
+        <CountCard title="Finalized Blocks" :isLoading="blocksLoading" :count='finalizedBlocks' route="blocks"  />
+        <CountCard title="Transactions" :isLoading="txsLoading" :count='txs' route="transactions"/>
+        <CountCard title="Accounts" :isLoading="accountsLoading" :count='accounts' route="accounts"/>
         
-        <router-link to="/blocks">
-        <div class="card">
-            
-            <div class="card-header">Finalized Blocks </div>
-            <div class="card-body">  {{finalizedBlocks}}  </div>
-            
-        </div>
-        </router-link> 
-        <router-link to="/transactions">
-       <div class="card">
-            <div class="card-header">Transactions</div>
-            <div class="card-body"> {{txs}} </div>
-        </div>
-        </router-link> 
-         <router-link to="/accounts">
-        <div class="card">
-            <div class="card-header">Accounts</div>
-            <div class="card-body"> {{accounts}} </div>
-        </div>
-        </router-link> 
+    
 
     </div>
 </template>
@@ -30,26 +15,34 @@
 import blocksApi from '../gateways/blockApis/blocksApi'
 import accountsApi from '../gateways/accountApis/accountsApi'
 import txApi from '../gateways/transactionApis/transactionsApi'
+import CountCard from './CountCard.vue'
     export default {
 
         name: 'TheDetailsCard',
+        components: {
+            CountCard
+        },
         data(){
             return {
                 finalizedBlocks: 0,
                 blockTimer: '',
+                blocksLoading: true,
 
                 accounts: 0,
                 accountTimer: '',
+                accountsLoading: true,
+
 
                 txs: 0,
                 txTimer: '',
-                
+                txsLoading: true,
+
                 errorMsg: ''
             }
         },
 
         beforeCreate(){
-            this.$store.dispatch('toggleOnLoading')
+           // this.$store.dispatch('toggleOnLoading')
         },
         created(){
             this.fetchBlocksNumber()
@@ -69,14 +62,17 @@ import txApi from '../gateways/transactionApis/transactionsApi'
             
            fetchBlocksNumber() {
             blocksApi.get()
-            .then(response => this.finalizedBlocks = response.data.block.header.number)
+            .then(response => {
+                this.finalizedBlocks = response.data.block.header.number
+                this.blocksLoading = false;
+            })
             .catch(error => this.errorMsg = error)
            },
            fetchAccountsNumber(){
              accountsApi.get('/count')
              .then(response => {
                  this.accounts = response.data[0].count
-                 this.$store.dispatch('toggleOffLoading')
+                 this.accountsLoading = false;
              })
              
              .catch(error => this.errorMsg = error)
@@ -85,7 +81,7 @@ import txApi from '../gateways/transactionApis/transactionsApi'
               txApi.get('/count')
              .then(response => {
                 this.txs = response.data[0].count
-                
+                this.txsLoading = false
                 
              })
              .catch(error => this.errorMsg = error)

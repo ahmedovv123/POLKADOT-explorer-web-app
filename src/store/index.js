@@ -21,8 +21,7 @@ export default createStore({
                 state.blocks.unshift(block)
             }
             
-            
-        },
+                   },
         clearBlocks(state){
             state.blocks.pop()
         },
@@ -61,7 +60,7 @@ export default createStore({
                 
                 response.data.block.extrinsics.map(ex => {
                     
-                    if(ex.method.method == 'transfer'){
+                    if(ex.method.method == 'transfer' || ex.method.method == 'transferKeepAlive'){
                         
                         commit('fetchTransaction',ex)
                     }

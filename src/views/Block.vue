@@ -1,4 +1,7 @@
 <template>
+
+<div>
+    
     <div class="block" >
         <div class="block-header">
             <i class="fas fa-cube"></i>
@@ -11,7 +14,7 @@
                 <h3>Hash</h3>
                 <h3>Parent hash</h3>
                 <h3>State Root</h3>
-                <h3>Extrinsic Root</h3>
+                <h3>Extrinsics Root</h3>
                 <h3>Transactions</h3>
             </div>
             <div class="right">
@@ -24,13 +27,54 @@
             </div>
         </div>
     </div>
+
+    <div class="transactions">
+        <div class="block" >
+        <div class="block-header">
+            <i class="fas fa-file-signature"></i>
+            <h2>Transactions</h2>
+
+        </div>
+         <div class="table">
+            
+        <table>
+             <colgroup>
+        <col width="33%" />
+        <col width="33%" />
+        <col width="33%" />
+
+        </colgroup>
+            <tr class="header">
+                <th>From </th>
+                <th class="tx-to-header">To  </th>
+                <th>Amount </th>
+            </tr>
+            <div v-if='txs.length == 0' >
+                <tr>
+                    <td>No Transactions in this block</td>
+                </tr>
+            </div>
+            <tr v-for="tx in txs" :key='tx'> 
+            <td class="tx-from" @click='goToAccount(tx.signer.Id)' >  {{tx.signer.Id}} </td>
+            <td class="tx-to" @click='goToAccount(tx.method.args[0].Id)'  > {{tx.method.args[0].Id}}  </td>
+            <td> {{tx.method.args[1]}} </td>
+            </tr>
+            
+        
+        </table>
+    </div>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
 import blocksApi from '../gateways/blockApis/blocksApi'
 
+
     export default {
         name: 'Block',
+       
         methods: {
             blockDate(timestamp){
                 let seconds = parseFloat(timestamp.replace(/,/g,''))
@@ -40,21 +84,27 @@ import blocksApi from '../gateways/blockApis/blocksApi'
                 return blockDate
             },
             getTransactionsLength(extrinsics){
-                return extrinsics.filter(ex => ex.method.method == 'transfer' || ex.method.method == 'transfer_keep_alive' ).length
+                if(!extrinsics.length == 0)
+                return extrinsics.filter(ex => ex.method.method == 'transfer' || ex.method.method == 'transferKeepAlive' ).length
+            },
+             goToAccount(accountId){
+                this.$store.dispatch('toggleOnLoading')
+                this.$router.push({path: `/accounts/${accountId}`})
             }
         },
         data (){
            return {
-               blockNumber: this.$route.params.num,
+               blockNumber: '',
                blockHash: '',
-               block: {}
+               block: {},
+               txs: []
            } 
         },beforeCreate(){
             this.$store.dispatch('toggleOnLoading')
 
         },
         created(){
-
+            this.blockNumber = this.$route.params.num
             blocksApi.get(`/num/${this.blockNumber}`)
             .then(response => {
                 this.blockHash = response.data
@@ -62,6 +112,8 @@ import blocksApi from '../gateways/blockApis/blocksApi'
                .then(response => {
                    this.block = response.data.block
                    console.log(this.block);
+                   this.txs = response.data.block.extrinsics.filter(ex => ex.method.method == 'transfer' 
+                   || ex.method.method == 'transferKeepAlive' )
                    this.$store.dispatch('toggleOffLoading')
                })
 
@@ -73,6 +125,9 @@ import blocksApi from '../gateways/blockApis/blocksApi'
 </script>
 
 <style scoped>
+
+
+
 .block{
     width:100%;
     height:max-content;
@@ -103,6 +158,72 @@ i{
 
 .block-body {
     display: flex;
+    
+}
+
+.tx-from{
+    text-decoration: underline;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap; 
+    text-overflow:ellipsis; 
+    overflow: hidden; 
+    max-width:1px;
+    padding: 10px 10px;
+}
+
+.tx-from:hover{
+    color: blue;
+}
+
+.tx-to-header {
+    border-left: 2px solid grey;
+    border-right: 2px solid grey;
+}
+
+.tx-to:hover{
+    color: blue;
+}
+
+.tx-to  {
+    border-left: 2px solid grey;
+    border-right: 2px solid grey;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap; 
+    text-overflow:ellipsis; 
+    overflow: hidden; 
+    max-width:1px;
+    padding: 10px 10px;
+}
+
+table tr th {
+    border-bottom: 2px solid grey;
+    padding: 10px;
+}
+
+.table a {
+    text-decoration: none;
+}
+
+h2 {
+    text-align: center;
+    
+    padding: 20px 0;
+    margin: 0;
+}
+
+table td{
+    text-align: center;
+    
+}
+.table{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    font-size: 19px;
+    
     
 }
 </style>
