@@ -1,7 +1,7 @@
 var express = require("express");
 var app = express();
 var serveStatic = require('serve-static');
-var path ="../dist";
+var path ="/home/dist";
 app.use(serveStatic(path));
 
 app.get('/', function (req,res) {
@@ -10,6 +10,6 @@ app.get('/', function (req,res) {
 
 
 
-app.listen(8081, () => {
- console.log("Server running on port 8081");
+app.listen(4000, () => {
+ console.log("Server running on port 4000");
 });
