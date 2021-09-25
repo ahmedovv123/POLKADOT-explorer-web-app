@@ -4,14 +4,6 @@
 - Docker
 - node js
 
-### Run project
-```
-npm install
-npm run build
-cd server
-npm install
-node index.js
-```
 
 
 ### Run project with Docker
