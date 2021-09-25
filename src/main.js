@@ -1,27 +1,12 @@
-import { createApp } from 'vue'
+import { createApp, Vue } from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store'
 
 
-
-
-
-let app = createApp(App)
-
-
-app.config.globalProperties.API_URL = 'http://node2.blackseachain.com:8080'
-
-app.use(router).mount('#app')
-
-
-
-
-
-
-
-
-//createApp(App).use(router).mount('#app')
-//app.config.globalProperties.$API_URL = 'http://node2.blackseachain.com:8080'
-
+createApp(App)
+.use(store)
+.use(router)
+.mount('#app')
 
 

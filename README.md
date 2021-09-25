@@ -5,13 +5,10 @@
 - node js
 
 
-### Run project
+
+### Run project with Docker
 ```
 docker build -t explorer .
 docker run -dp 4000:4000 explorer
 ```
-
-### Configuration
-To change the api server go to /src/main.js and edit API_URL.
-
 
