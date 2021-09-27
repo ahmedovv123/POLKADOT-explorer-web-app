@@ -30,3 +30,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           docker build -t explorer .
+          npm run test:unit
