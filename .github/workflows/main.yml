@@ -30,5 +30,6 @@ jobs:
       - name: Run a multi-line script
         run: |
           cd $GITHUB_WORKSPACE
+          npm run test:unit
           docker build -t explorer .
           
