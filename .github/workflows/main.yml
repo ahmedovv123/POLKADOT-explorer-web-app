@@ -31,4 +31,4 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           docker build -t explorer .
-          npm run test:unit
+          
