@@ -29,5 +29,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
+          cd $GITHUB_WORKSPACE
           docker build -t explorer .
           npm run test:unit
