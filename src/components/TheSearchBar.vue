@@ -2,7 +2,7 @@
     <div class='inputs'>
         <div style="color:red" v-show="errorMsg" ><h3> {{errorMsg}} </h3></div>
         
-        <input @keydown.enter='sendData' placeholder="Search by block / transaction / account" type="text" v-model="input">
+        <input id=search @keydown.enter='sendData' placeholder="Search by block / transaction / account" type="text" v-model="input">
         
     </div>
 </template>

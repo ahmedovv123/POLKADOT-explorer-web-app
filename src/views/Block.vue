@@ -10,7 +10,7 @@
         </div>
         <div class="block-body">
             <div class="left">
-                <h3>Timestamp</h3>
+                <h3 id=time>Timestamp</h3>
                 <h3>Hash</h3>
                 <h3>Parent hash</h3>
                 <h3>State Root</h3>
