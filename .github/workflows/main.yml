@@ -39,11 +39,13 @@ jobs:
           context: ./
           load: true
           file: ./Dockerfile
-          tags: ${{ env.TEST_TAG }}
+          tags: test
+          
+          
       
       -  name: Test
          run: 
-          docker run --rm ${{ env.TEST_TAG }} sh -c "npm run test:unit"
+          docker run --rm test sh -c "npm run test:unit"
       
       -  name: Build and push
          uses: docker/build-push-action@v2
