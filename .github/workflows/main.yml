@@ -31,18 +31,28 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_BOZHIDAR_ACCESS_TOKEN }}
 
      
-         
-          
+     
+     
       - name: Build 
-        id: docker_build
         uses: docker/build-push-action@v2
         with:
           context: ./
+          load: true
           file: ./Dockerfile
-          push: false
+          tags: ${{ env.TEST_TAG }}
+      
+      -  name: Test
+         run: 
+          docker run --rm ${{ env.TEST_TAG }} sh -c "npm run test:unit"
+      
+      -  name: Build and push
+         uses: docker/build-push-action@v2
+         with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
           tags: ${{ secrets.DOCKER_HUB_BOZHIDAR_USERNAME }}/polkadot-explorer-web-app:latest
+     
+         
           
-      - name: Run test
-        run: |
-            docker run docker_build sh -c "npm run test:unit"
-        
+     
