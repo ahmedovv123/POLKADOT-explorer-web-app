@@ -131,13 +131,13 @@ import adddressesApi from '../gateways/accountApis/addressesApi'
                     this.acc.forEach(acc => {
                         adddressesApi.get(`/transactions/count/${acc.toString()}`)
                         .then(count => {
-                            console.log(count.data[0].count)
+                            
                             this.accountTxsCounts.push(count.data[0].count)
                         })
 
                         adddressesApi.get(`/balance/${acc.toString()}`)
                         .then(balance => {
-                            console.log(balance.data)
+                            
                             this.accountBalances.push(balance.data.data.free)
                         })
                     })
