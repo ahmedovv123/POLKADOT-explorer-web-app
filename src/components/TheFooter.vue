@@ -30,7 +30,7 @@
 .links {
     display: flex;
     justify-content: center;
-    padding: 16px;
+    padding: 15px;
     
 }
 
