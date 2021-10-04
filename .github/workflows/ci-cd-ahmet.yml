@@ -39,6 +39,6 @@ jobs:
             context: ./
             file: ./Dockerfile
             push: true
-            tags: ${{ secrets.DOCKER_HUB_AHMET_USERNAME }}/${{ github.event.repository.name }}:latest
+            tags: ${{ secrets.DOCKER_HUB_AHMET_USERNAME }}/polkadot-explorer-web-app:latest
 
 
