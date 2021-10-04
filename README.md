@@ -1,19 +1,14 @@
-# web
+# POLKADOT-explorer-web-app
 
-## Project setup
-```
-npm install
-```
+## Project requirements
+- Docker
+- node js
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
+
+### Run project with Docker
 ```
-npm run build
+docker build -t explorer .
+docker run -dp 4000:4000 explorer
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
