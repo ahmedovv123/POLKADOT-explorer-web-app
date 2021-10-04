@@ -32,6 +32,12 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_AHMET_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_AHMET_ACCESS_TOKEN }}
           
+      - name: Run tests
+        run: |
+          cd $GITHUB_WORKSPACE
+          npm ci
+          npm run test:unit
+          
       - name: Build and push Docker image
         id: docker_build
         uses: docker/build-push-action@v2
